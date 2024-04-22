@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.GridLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -65,17 +66,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkWinAndShowMsg(player1Turn: Boolean) {
         if (checkForWin()) {
-            val winnerSymbol = if (player1Turn) "O" else "X"
-            val winnerText = if (winnerSymbol == "X") "Player 1 win" else "Player 2 win"
-            showMsg(winnerText)
+            val winnerSymbol = player1Turn.toPlayer()
+            showMsg(player1Turn.toWinText())
             if (winnerSymbol == "X") {
-                counter1++
-                binding.win1Txt.text = counter1.toString()
-                clearFields()
+                counter1 = binding.win1Txt.updateScoreAndReset(counter1) { clearFields() }
             } else {
-                counter2++
-                binding.win2Txt.text = counter2.toString()
-                clearFields()
+                counter2 = binding.win2Txt.updateScoreAndReset(counter2) { clearFields() }
 
             }
             return
