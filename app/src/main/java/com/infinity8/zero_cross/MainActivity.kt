@@ -54,11 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun buttonClicked(button: Button) {
         if (button.text.toString().isEmpty()) {
-            if (player1Turn) {
-                button.text = "X"
-            } else {
-                button.text = "O"
-            }
+            button.text = if (player1Turn) "X" else "O"
             player1Turn = !player1Turn
         }
         checkWinAndShowMsg(player1Turn)
