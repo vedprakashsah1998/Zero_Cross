@@ -69,9 +69,13 @@ class MainActivity : AppCompatActivity() {
             val winnerSymbol = player1Turn.toPlayer()
             showMsg(player1Turn.toWinText())
             if (winnerSymbol == "X") {
-                counter1 = binding.win1Txt.updateScoreAndReset(counter1) { clearFields() }
+                counter1 = binding.win1Txt.updateScoreAndReset(counter1) {
+                    buttons.clearFields()
+                }
             } else {
-                counter2 = binding.win2Txt.updateScoreAndReset(counter2) { clearFields() }
+                counter2 = binding.win2Txt.updateScoreAndReset(counter2) {
+                    buttons.clearFields()
+                }
 
             }
             return
@@ -80,19 +84,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun clearFields() {
-        for (i in 0 until 3) {
-            for (j in 0 until 3) {
-                buttons[i][j]?.text = ""
-            }
-        }
-    }
-
     private fun showMsg(message: String) {
         showToast(message)
-        clearFields()
+        buttons.clearFields()
     }
-
 
     private fun checkForWin(): Boolean {
         for (i in 0 until 3) {

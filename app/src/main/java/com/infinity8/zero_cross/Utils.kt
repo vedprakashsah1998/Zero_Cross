@@ -45,5 +45,9 @@ fun TextView.updateScoreAndReset(counter: Int, clearFields:()->Unit): Int {
     return newCounter
 }
 
+fun Array<Array<Button?>>.clearFields() {
+    this.flatten().map { it?.let { button -> button.text = "" } }
+}
+
 fun Boolean.toPlayer(): String = if (this) "X" else "O"
 fun Boolean.toWinText(): String = if (this) "Player 1 win" else "Player 2 win"
