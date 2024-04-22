@@ -41,16 +41,9 @@ class MainActivity : AppCompatActivity() {
                     rowSpec = GridLayout.spec(i, GridLayout.FILL, 1f)
                     columnSpec = GridLayout.spec(j, GridLayout.FILL, 1f)
                 }
-                button.apply {
-                    layoutParams = params
-                    gravity = Gravity.CENTER
-                    inputType = InputType.TYPE_NULL
-                    tag = intArrayOf(i, j)
-                    textSize = 30f
-                    setOnClickListener {
-                        buttonClicked(it as Button)
-                    }
-                }
+                buttonFunctionality(button, params, i, j, onClick = {
+                    buttonClicked(it)
+                })
 
                 buttons[i][j] = button
                 binding.gridLayout.addView(button)
@@ -100,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showMsg(message: String) {
-        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
+        showToast(message)
         clearFields()
     }
 
@@ -136,13 +129,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
-    private fun checkRowCol(
-        button1: Button,
-        button2: Button,
-        button3: Button
-    ) =
-        button1.text.toString()
-            .isNotEmpty() && button1.text.toString() == button2.text.toString() && button2.text.toString() == button3.text.toString()
 
 }
