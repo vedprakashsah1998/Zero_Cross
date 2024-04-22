@@ -37,16 +37,19 @@ class MainActivity : AppCompatActivity() {
             for (j in 0 until 3) {
                 val button = Button(this)
                 val params = GridLayout.LayoutParams()
-                params.rowSpec = GridLayout.spec(i, GridLayout.FILL, 1f)
-                params.columnSpec = GridLayout.spec(j, GridLayout.FILL, 1f)
-                button.layoutParams = params
-                button.gravity = Gravity.CENTER
-                button.inputType = InputType.TYPE_NULL
-                button.tag = intArrayOf(i, j)
-                button.textSize = 30f
-
-                button.setOnClickListener {
-                    buttonClicked(it as Button)
+                params.apply {
+                    rowSpec = GridLayout.spec(i, GridLayout.FILL, 1f)
+                    columnSpec = GridLayout.spec(j, GridLayout.FILL, 1f)
+                }
+                button.apply {
+                    layoutParams = params
+                    gravity = Gravity.CENTER
+                    inputType = InputType.TYPE_NULL
+                    tag = intArrayOf(i, j)
+                    textSize = 30f
+                    setOnClickListener {
+                        buttonClicked(it as Button)
+                    }
                 }
 
                 buttons[i][j] = button
@@ -67,9 +70,6 @@ class MainActivity : AppCompatActivity() {
         checkWinAndShowMsg(player1Turn)
     }
 
-    /**
-     *
-     */
     private fun checkWinAndShowMsg(player1Turn: Boolean) {
         if (checkForWin()) {
             val winnerSymbol = if (player1Turn) "O" else "X"
